@@ -19,7 +19,7 @@ stopButton.addEventListener("click", stopRecording);
 pauseButton.addEventListener("click", pauseRecording);
 
 function startRecording() {
-	console.log("recordButton clicked");
+	
 
 	/*
 		Simple constraints object, for more advanced audio features see
@@ -42,7 +42,7 @@ function startRecording() {
 	*/
 
 	navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
-		console.log("getUserMedia() success, stream created, initializing Recorder.js ...");
+		//console.log("getUserMedia() success, stream created, initializing Recorder.js ...");
 
 		/*
 			create an audio context after getUserMedia is called
@@ -70,7 +70,7 @@ function startRecording() {
 		//start the recording process
 		rec.record()
 
-		console.log("Recording started");
+		//console.log("Recording started");
 
 	}).catch(function(err) {
 	  	//enable the record button if getUserMedia() fails
@@ -81,7 +81,7 @@ function startRecording() {
 }
 
 function pauseRecording(){
-	console.log("pauseButton clicked rec.recording=",rec.recording );
+	//console.log("pauseButton clicked rec.recording=",rec.recording );
 	if (rec.recording){
 		//pause
 		rec.stop();
@@ -95,7 +95,7 @@ function pauseRecording(){
 }
 
 function stopRecording() {
-	console.log("stopButton clicked");
+	//console.log("stopButton clicked");
 
 	//disable the stop button, enable the record too allow for new recordings
 	stopButton.disabled = true;
@@ -120,70 +120,35 @@ function createDownloadLink(blob) {
 	var url = URL.createObjectURL(blob);
 	var au = document.createElement('audio');
 	var li = document.createElement('li');
-	var link = document.createElement('a');
 
 	//name of .wav file to use during upload and download (without extendion)
-	var filename = new Date().toISOString();
+	var filename = new Date().toISOString()+".wav"
 
 	//add controls to the <audio> element
 	au.controls = true;
 	au.src = url;
 
-	//save to disk link
-	link.href = url;
-	link.download = filename+".wav"; //download forces the browser to donwload the file using the  filename
-	link.innerHTML = "Save to disk";
-
 	//add the new audio element to li
 	li.appendChild(au);
 	
 	//add the filename to the li
-	li.appendChild(document.createTextNode(filename+".wav "))
-
-	//add the save to disk link to li
-	li.appendChild(link);
+	li.appendChild(document.createTextNode(filename))
 	
 	//upload link
 	var upload = document.createElement('a');
 	upload.href="#";
 	upload.innerHTML = "Upload";
 	upload.addEventListener("click", function(event){
-		
-
-
-
-
-		  var xhr=new XMLHttpRequest();
-		  xhr.onload=function(e) {
-		      if(this.readyState === 4) {
-		          console.log("Server returned: ",e.target.responseText);
-		      }
-		  };
-		  var fd=new FormData();
-		  fd.append("audio_data",blob, filename);
-		  xhr.open("POST","upload.php",true);
-		  xhr.send(fd);
-
-		  var req = fetch('/file/upload', {
-			method: 'post',
-			body: fd /* or aFile[0]*/
-		  }); // returns a promise
-		  
-		  req.then(function(res) {
-			// returns status + response headers
-			// but not yet the body, 
-			// for that call `response[text() || json() || arrayBuffer()]` <-- also promise
-		  
-			if (res.ok) {
-			  // status code was 200-299
-			  console.log("FOI", res)
-			} else {
-				console.log("F", res)
-			  // status was something else
+		var xhr=new XMLHttpRequest();
+		xhr.onload=function(e) {
+			if(this.readyState === 4) {
+				console.log("Server returned: ",e.target.responseText);
 			}
-		  }, function(error) {
-			console.error('failed due to network error or cross domain')
-		  })
+		};
+		var fd=new FormData();
+		fd.append("file",blob, filename);
+		xhr.open("POST","/file/upload",true);
+		xhr.send(fd);
 	})
 	li.appendChild(document.createTextNode (" "))//add a space in between
 	li.appendChild(upload)//add the upload link to li

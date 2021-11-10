@@ -23,7 +23,6 @@ app.use("/file", upload);
 // media routes
 app.get("/file/:filename", async (req, res) => {
     try {
-        console.log(req.params)
         const file = await gfs.files.findOne({ filename: req.params.filename });
         const readStream = gfs.createReadStream(file.filename);
         readStream.pipe(res);
