@@ -148,6 +148,11 @@ function createDownloadLink(blob) {
 	upload.href="#";
 	upload.innerHTML = "Upload";
 	upload.addEventListener("click", function(event){
+		
+
+
+
+
 		  var xhr=new XMLHttpRequest();
 		  xhr.onload=function(e) {
 		      if(this.readyState === 4) {
@@ -158,6 +163,27 @@ function createDownloadLink(blob) {
 		  fd.append("audio_data",blob, filename);
 		  xhr.open("POST","upload.php",true);
 		  xhr.send(fd);
+
+		  var req = fetch('/file/upload', {
+			method: 'post',
+			body: fd /* or aFile[0]*/
+		  }); // returns a promise
+		  
+		  req.then(function(res) {
+			// returns status + response headers
+			// but not yet the body, 
+			// for that call `response[text() || json() || arrayBuffer()]` <-- also promise
+		  
+			if (res.ok) {
+			  // status code was 200-299
+			  console.log("FOI", res)
+			} else {
+				console.log("F", res)
+			  // status was something else
+			}
+		  }, function(error) {
+			console.error('failed due to network error or cross domain')
+		  })
 	})
 	li.appendChild(document.createTextNode (" "))//add a space in between
 	li.appendChild(upload)//add the upload link to li
@@ -165,3 +191,4 @@ function createDownloadLink(blob) {
 	//add the li element to the ol
 	recordingsList.appendChild(li);
 }
+
