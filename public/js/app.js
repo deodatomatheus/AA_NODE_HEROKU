@@ -162,7 +162,7 @@ function createDownloadLink(blob) {
 
 	//name of .wav file to use during upload and download (without extendion)
 	
-	filename = userName + '_' + sentences[sendedCount].replace(/\s/g, '_') + ".wav"
+	filename = (userName + '_' + sentences[sendedCount].replace(/\s/g, '_') + ".wav").toLowerCase()
 	audio_blob = blob
 	//add controls to the <audio> element
 	au.controls = true;
