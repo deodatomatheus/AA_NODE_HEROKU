@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  
+
   <!-- Modal -->
   <div id="meuModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -21,51 +21,56 @@
 
         <!-- Cabeçalho do modal -->
         <div class="modal-header">
-          <h4 class="modal-title">Informações importantes</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"><strong>Informações importantes</strong></h4>
         </div>
 
         <!-- Corpo do modal -->
         <div class="modal-body">
-          <p><strong>O objetivo dessa aplicação é colher amostras de audios de determinadas frases, para isso contamos com sua ajuda.</strong></p>
+          <p><strong>O objetivo dessa aplicação é colher amostras de audios de determinadas frases, para isso contamos
+              com sua ajuda.</strong></p>
           <p>
-            Quando você clicar em <strong>Continuar</strong> serão lhe apresentadas algumas frases, basta clicar em 
+            Quando você clicar em <strong>Continuar</strong> serão lhe apresentadas algumas frases, basta clicar em
             <strong>Gravar</strong>, falar a frase e clicar em <strong>Parar</strong> em seguida.
           </p>
           <p>
-            Lembre-se de escutar sua gravação para checar se tudo ocorreu bem. Se ocorreu clique em <strong>Enviar</strong>,
-            caso contrário basta clicar em <strong>Regravar</strong> e repetir o processo.
+            Lembre-se de escutar sua gravação para checar se tudo ocorreu bem. Se ocorreu clique em
+            <strong>Enviar</strong>,
+            caso contrário basta clicar em <strong>Gravar</strong> novamante e repetir o processo.
           </p>
 
           <br>
-            
+
           <label for="modal-name" class="form-label" style="color: indianred;"><strong>Digite seu Nome:</strong></label>
           <input type="text" class="form-control" id="modal-name" placeholder="Nome" required>
-          
+
           <br>
-          
-          <p><strong>O time do AudioAlerta agradece sua colaboração</strong></p>
+
+          <p><strong>O time do AudioAlerta agradece sua colaboração.</strong></p>
         </div>
 
         <!-- Rodapé do modal-->
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" onClick="reply_click(this.id)" id="modal-button">Continuar</button>
+          <button type="button" class="btn btn-primary" onClick="reply_click(this.id)"
+            id="modal-button">Continuar</button>
         </div>
 
       </div>
     </div>
   </div>
 
+
   <div class="recorder">
     <h1>AudioAlerta - Recorder</h1>
-    <div id="controls">
-    <button id="recordButton">Record</button>
-    <button id="pauseButton" disabled>Pause</button>
-    <button id="stopButton" disabled>Stop</button>
+    <br>
+    <div>
+      <h2 id="frase"></h2>
+      <div id="controls">
+        <button id="recordButton">Gravar</button>
+        <button id="stopButton" disabled>Parar</button>
+        <button id="uploadButton" disabled>Enviar</button>
+      </div>
+      <p id="audio-info"></p>
     </div>
-    <div id="formats">Format: start recording to see sample rate</div>
-    <p><strong>Recordings:</strong></p>
-    <ol id="recordingsList"></ol>
   </div>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -82,12 +87,12 @@
   <script type="text/javascript">
     $('#meuModal').modal()
     var nome
-    function reply_click(clicked_id){
+    function reply_click(clicked_id) {
       var str = $("#modal-name").val();
-      if(str.length){
+      if (str.length) {
         nome = str
         $('#meuModal').modal('hide')
-      }else{
+      } else {
         alert("Informe seu nome")
       }
     }

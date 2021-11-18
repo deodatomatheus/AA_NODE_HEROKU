@@ -17,7 +17,6 @@ conn.once("open", function () {
     gfs.collection("fs");
 });
 
-
 app.use("/file", upload);
 
 // media routes
