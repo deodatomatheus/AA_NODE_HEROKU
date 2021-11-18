@@ -17,7 +17,9 @@ body {
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	color:black;
-	margin:2em;
+  width:100%;
+  display: flex;
+  justify-content: center;
 }
 
 h1 {
@@ -45,7 +47,7 @@ red {
   max-width: 28em;
 } 
 
-button {
+.recorder button {
   flex-grow: 1;
   height: 3.5rem;
   min-width: 2rem;
@@ -63,25 +65,25 @@ button {
   font-size: 1.5rem;
 }
 
-button:hover, button:focus {
+.recorder button:hover, button:focus {
   outline: none;
   background: #c72d1c;
 }
 
-button::-moz-focus-inner {
+.recorder button::-moz-focus-inner {
   border: 0;
 }
 
-button:active {
+.recorder button:active {
   box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.2);
   line-height: 3rem;
 }
 
-button:disabled {
+.recorder button:disabled {
   pointer-events: none;
   background: lightgray;
 }
-button:first-child {
+.recorder button:first-child {
   margin-left: 0;
 }
 
