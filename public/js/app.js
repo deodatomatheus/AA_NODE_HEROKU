@@ -8,9 +8,16 @@ var userName							//Name of the user, used in filename
 var filename
 var audio_blob
 var sendedCount = 0
-var sentences = ["Perdeu Playboy",
-	"é um assalto",
-	"passa é um assalto"
+var sentences = [
+	"assalto dinheiro assalto playboy",
+	"o socorro perdeu playboy",
+	"passa o socorro dinheiro",
+	"playboy passa o dinheiro",
+	"perdeu assalto passa dinheiro",
+	"playboy dinheiro o assalto",
+	"socorro assalto perdeu passa",
+	"playboy perdeu o passa",
+	"socorro socorro assalto dinheiro"
 ]
 
 // shim for AudioContext when it's not avb. 
